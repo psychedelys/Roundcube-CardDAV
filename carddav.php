@@ -5,6 +5,7 @@
  */
 require_once dirname(__FILE__) . '/carddav_backend.php';
 require_once dirname(__FILE__) . '/carddav_addressbook.php';
+require_once dirname(__FILE__) . '/carddav_crypto.php';
 
 /**
  * Roundcube CardDAV implementation
@@ -522,6 +523,8 @@ class carddav extends rcube_plugin
 	public function carddav_server_save()
 	{
 		$rcmail = rcmail::get_instance();
+		$crypto = new carddav_crypto($rcmail->get_user_password());
+
 
 		if ($this->carddav_server_check_connection())
 		{
@@ -539,7 +542,7 @@ class carddav extends rcube_plugin
 					(?, ?, ?, ?, ?, ?)
 			";
 
-			$rcmail->db->query($query, $user_id, $url, $username, $rcmail->encrypt($password), $label, $read_only);
+			$rcmail->db->query($query, $user_id, $url, $username, $crypto->encrypt($password), $label, $read_only);
 
 			if ($rcmail->db->affected_rows())
 			{
