@@ -699,6 +699,7 @@ class carddav_addressbook extends rcube_addressbook
 	private function carddav_delete($carddav_contact_ids)
 	{
 		$rcmail = rcmail::get_instance();
+		$crypto = new carddav_crypto($rcmail->get_user_password());
 		$server = current(carddav::get_carddav_server($this->carddav_server_id));
 		$carddav_backend = new carddav_backend($server['url']);
 		$carddav_backend->set_auth($server['username'], $crypto->decrypt($server['password']));
