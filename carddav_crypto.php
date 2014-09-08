@@ -88,7 +88,7 @@ class carddav_crypto{
      *
      * @return string decrypted text
      */
-    public function decrypt($cipher, $key = 'des_key', $base64 = true)
+    public function decrypt($cipher, $base64 = true)
     {
         if (!$cipher) {
             return '';
@@ -105,7 +105,7 @@ class carddav_crypto{
         }
 
         $cipher = substr($cipher, $iv_size);
-        mcrypt_generic_init($this->mcrypt_handle, $key, $iv);
+        mcrypt_generic_init($this->mcrypt_handle, $this->key, $iv);
         $clear = mdecrypt_generic($this->mcrypt_handle, $cipher);
         mcrypt_generic_deinit($this->mcrypt_handle);
         mcrypt_module_close($this->mcrypt_handle);
