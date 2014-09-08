@@ -368,7 +368,7 @@ class carddav_addressbook extends rcube_addressbook
 	public function carddav_addressbook_sync($server, $carddav_contact_id = null, $vcard_id = null)
 	{
 		$rcmail = rcmail::get_instance();
-		$crypto = new carddav_crypto($rcmail->geT_usr_password());
+		$crypto = new carddav_crypto($rcmail->get_user_password());
 		$any_data_synced = false;
 
 		self::write_log('Starting CardDAV-Addressbook synchronization');
@@ -647,7 +647,7 @@ class carddav_addressbook extends rcube_addressbook
 	private function carddav_add($vcard)
 	{
 		$rcmail = rcmail::get_instance();
-		$crypto = new carddav_crypto($rcmail->geT_usr_password());
+		$crypto = new carddav_crypto($rcmail->get_user_password());
 		$server = current(carddav::get_carddav_server($this->carddav_server_id));
 		$carddav_backend = new carddav_backend($server['url']);
 		$carddav_backend->set_auth($server['username'], $crypto->decrypt($server['password']));
@@ -673,7 +673,7 @@ class carddav_addressbook extends rcube_addressbook
 	private function carddav_update($carddav_contact_id, $vcard)
 	{
 		$rcmail = rcmail::get_instance();
-		$crypto = new carddav_crypto($rcmail->geT_usr_password());
+		$crypto = new carddav_crypto($rcmail->get_user_password());
 		$contact = $this->get_carddav_addressbook_contact($carddav_contact_id);
 		$server = current(carddav::get_carddav_server($this->carddav_server_id));
 		$carddav_backend = new carddav_backend($server['url']);
