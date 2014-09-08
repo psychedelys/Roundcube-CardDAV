@@ -357,12 +357,13 @@ class carddav_addressbook extends rcube_addressbook
 	public function carddav_addressbook_sync($server, $carddav_contact_id = null, $vcard_id = null)
 	{
 		$rcmail = rcmail::get_instance();
+		$crypto = new carddav_crypto($rcmail->geT_usr_password());
 		$any_data_synced = false;
 
 		self::write_log('Starting CardDAV-Addressbook synchronization');
 
 		$carddav_backend = new carddav_backend($server['url']);
-		$carddav_backend->set_auth($server['username'], $rcmail->decrypt($server['password']));
+		$carddav_backend->set_auth($server['username'], $crypto->decrypt($server['password']));
 
 		if ($carddav_backend->check_connection())
 		{
@@ -635,9 +636,10 @@ class carddav_addressbook extends rcube_addressbook
 	private function carddav_add($vcard)
 	{
 		$rcmail = rcmail::get_instance();
+		$crypto = new carddav_crypto($rcmail->geT_usr_password());
 		$server = current(carddav::get_carddav_server($this->carddav_server_id));
 		$carddav_backend = new carddav_backend($server['url']);
-		$carddav_backend->set_auth($server['username'], $rcmail->decrypt($server['password']));
+		$carddav_backend->set_auth($server['username'], $crypto->decrypt($server['password']));
 
 		if ($carddav_backend->check_connection())
 		{
@@ -660,10 +662,11 @@ class carddav_addressbook extends rcube_addressbook
 	private function carddav_update($carddav_contact_id, $vcard)
 	{
 		$rcmail = rcmail::get_instance();
+		$crypto = new carddav_crypto($rcmail->geT_usr_password());
 		$contact = $this->get_carddav_addressbook_contact($carddav_contact_id);
 		$server = current(carddav::get_carddav_server($this->carddav_server_id));
 		$carddav_backend = new carddav_backend($server['url']);
-		$carddav_backend->set_auth($server['username'], $rcmail->decrypt($server['password']));
+		$carddav_backend->set_auth($server['username'], $crypto->decrypt($server['password']));
 
 		if ($carddav_backend->check_connection())
 		{
@@ -687,7 +690,7 @@ class carddav_addressbook extends rcube_addressbook
 		$rcmail = rcmail::get_instance();
 		$server = current(carddav::get_carddav_server($this->carddav_server_id));
 		$carddav_backend = new carddav_backend($server['url']);
-		$carddav_backend->set_auth($server['username'], $rcmail->decrypt($server['password']));
+		$carddav_backend->set_auth($server['username'], $crypto->decrypt($server['password']));
 
 		if ($carddav_backend->check_connection())
 		{
