@@ -51,6 +51,7 @@ CardDAV server list
 * SabreDAV: https://example.com/addressbooks/{resource|principal|username}/{collection}/
 * ownCloud: https://example.com/remote.php/carddav/addressbooks/{resource|principal|username}/{collection}/
 * SOGo: https://example.com/SOGo/dav/{resource|principal|username}/Contacts/{collection}/
+* Radicale: https://example.com/Radicale/{resource|principal|username}/{collection}.vcf/
 
 
 Contact

@@ -76,6 +76,7 @@
  * SabreDAV: https://example.com/addressbooks/{resource|principal|username}/{collection}/
  * ownCloud: https://example.com/remote.php/carddav/addressbooks/{resource|principal|username}/{collection}/
  * SOGo: http://sogo-demo.inverse.ca/SOGo/dav/{resource|principal|username}/Contacts/{collection}/
+ * Radicale: http://example.com/Radicale/{resource|principal|username}/{collection}.vcf/ *
  *
  *
  * @author Christian Putzke <christian.putzke@graviox.de>

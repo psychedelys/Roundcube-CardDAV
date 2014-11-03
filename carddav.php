@@ -504,6 +504,9 @@ class carddav extends rcube_plugin
 		$table->add(array(), 'SOGo');
 		$table->add(array(), 'https://example.com/SOGo/dav/{resource|principal|username}/Contacts/{collection}/');
 
+		$table->add(array(), 'Radicale');
+		$table->add(array(), 'https://example.com/Radicale/{resource|principal|username}/{collection}.vcf/');
+
 		$content .= html::div(array('class' => 'carddav_headline example_server_list'), $this->gettext('settings_example_server_list'));
 		$content .= html::div(array('class' => 'carddav_container'), $table->show());
 
